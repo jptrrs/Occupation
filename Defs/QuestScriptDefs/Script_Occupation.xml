@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <QuestScriptDef>
+    <defName>Occupation</defName>
+    <rootSelectionWeight>0.0</rootSelectionWeight>
+    <rootMinPoints>0</rootMinPoints>
+    <rootMinProgressScore>3</rootMinProgressScore>
+    <expireDaysRange>1~8</expireDaysRange>
+    <canGiveRoyalFavor>true</canGiveRoyalFavor>
+    <questDescriptionAndNameRules>
+      <rulesStrings>
+        <li>lodgersLabel->guest</li>
+        <li>lodgersLabelPlural->[asker_faction_pawnsPlural]</li>
+      </rulesStrings>
+    </questDescriptionAndNameRules>
+    <questNameRules>
+      <rulesStrings>
+        <li>questName->Surrender!</li>
+      </rulesStrings>
+    </questNameRules>
+    <questDescriptionRules>
+      <include>
+        <li>QuestHospitalityCommon</li>
+      </include>
+      <rulesStrings>
+        <li>consequences(hostile==true)->utter destruction</li>
+        <li>consequences(hostile==false)->more bloodshed</li>
+        <li>questDescription->[enemyFaction_leaderTitle] [enemyFaction_leader_nameDef] of [enemyFaction_name], lets us know [enemyFaction_leader_pronoun] is prepared to accept our surrender if we want to avoid [consequences]. If we do, [enemyFaction_leader_possessive] [enemyFaction_pawnsPlural] will occupy our colony.</li>
+      </rulesStrings>
+    </questDescriptionRules>
+    <root Class="QuestNode_Sequence">
+      <nodes>
+        
+         <!--Convert raiders to guests--> 
+        <li Class="Occupation.QuestNode_Occupy">
+          <!--<factionOf>$asker</factionOf>-->
+          <faction>$enemy</faction>
+          <pawns>$occupiers</pawns>
+          <!--<factionType>HomeFaction</factionType>
+          <inSignalRemovePawn>lodgers.RanWild</inSignalRemovePawn>-->
+        </li>
+          
+        <!--<li Class="QuestNode_Letter">
+          <label TKey="LetterLabelShuttleArrived">Shuttle arrived</label>
+          <text TKey="LetterTextShuttleArrived">The shuttle has arrived to collect your colonists.</text>
+          <lookTargets>$shuttle</lookTargets>
+        </li>-->
+          
+        <li Class="QuestNode_End">
+          <outcome>Fail</outcome>
+        </li>
+                  
+      </nodes>
+    </root>
+  </QuestScriptDef>
+  
+
+</Defs>
