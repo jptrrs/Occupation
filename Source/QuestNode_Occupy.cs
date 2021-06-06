@@ -57,7 +57,16 @@ namespace Occupation
 
         private void ConvertToGuests()
         {
-            Faction.OfPlayer.SetRelationDirect(faction, FactionRelationKind.Neutral);
+            if (Faction.OfPlayer.RelationWith(faction, true) == null)
+            {
+                Faction.OfPlayer.SetRelation(new FactionRelation
+                {
+                    other = faction,
+                    goodwill = 0,
+                    kind = FactionRelationKind.Neutral
+                });
+            }
+            else Faction.OfPlayer.SetRelationDirect(faction, FactionRelationKind.Neutral);
             foreach (var pawn in pawns)
             {
                 pawn.ClearMind();

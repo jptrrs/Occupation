@@ -35,7 +35,7 @@
          <!--Convert raiders to guests--> 
         <li Class="Occupation.QuestNode_Occupy">
           <!--<factionOf>$asker</factionOf>-->
-          <faction>$enemy</faction>
+          <faction>$enemyFaction</faction>
           <pawns>$occupiers</pawns>
           <!--<factionType>HomeFaction</factionType>
           <inSignalRemovePawn>lodgers.RanWild</inSignalRemovePawn>-->
